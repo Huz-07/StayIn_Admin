@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Management - Hotel Stay In</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+        }
+        body {
+            background-color: var(--light-gray);
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 260px;
+            background-color: var(--dark-gray);
+            color: white;
+            padding-top: 20px;
+        }
+        .sidebar .nav-link {
+            color: #adb5bd;
+            font-size: 1rem;
+            padding: 12px 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+        }
+        .sidebar .sidebar-header {
+            padding: 0 20px 20px 20px;
+            border-bottom: 1px solid #495057;
+            text-align: center;
+        }
+        .sidebar .sidebar-header h3 {
+            margin: 0;
+            font-weight: 600;
+        }
+        .main-content {
+            margin-left: 260px;
+            padding: 30px;
+        }
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .room-card img {
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-user-shield"></i> StayIn Admin</h3>
+        </div>
+   <ul class="nav flex-column p-3">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Booking.html"><i class="fas fa-calendar-check me-2"></i> Bookings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="Room.html"><i class="fas fa-bed me-2"></i> Rooms</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="User.html"><i class="fas fa-users me-2"></i> Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Services.html"><i class="fas fa-concierge-bell me-2"></i> Services</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="Gallery.html"><i class="fas fa-images me-2"></i> Gallery</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Content.html"><i class="fas fa-file-alt me-2"></i> Content</a>
+            </li>
+            <li class="nav-item mt-auto">
+                <a class="nav-link" href="Setting.html"><i class="fas fa-cog me-2"></i> Settings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h2">Room Inventory & Management</h1>
+                <button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#addRoomModal"><i class="fas fa-plus me-1"></i> Add New Room</button>
+            </div>
+
+            <!-- Room Categories -->
+            <div class="row g-4">
+                <!-- Room Card Example 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card room-card h-100">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=400&h=250&fit=crop" class="card-img-top" alt="Deluxe Suite">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Deluxe Room</h5>
+                            <p class="card-text text-muted">Spacious room with king-size bed, city view, and modern amenities including free Wi-Fi and mini-bar.</p>
+                            <p class="fw-bold fs-5 mb-2">₹4,999/night </p>
+                            <div>
+                                <span class="badge bg-light text-dark">5 Available</span>
+                                <span class="badge bg-light text-dark">Sleeps 2</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-0 p-3">
+                            <button class="btn btn-outline-secondary w-100">Edit Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room Card Example 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card room-card h-100">
+                        <img src='https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&h=250&fit=crop' class="card-img-top" alt="Standard Room">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Executive Suite</h5>
+                            <p class="card-text text-muted">Premium suite with separate living area, premium bedding, and exclusive access to executive lounge.</p>
+                             <p class="fw-bold fs-5 mb-2">₹8,999/night</p>
+                             <div>
+                                <span class="badge bg-light text-dark">10 Available</span>
+                                <span class="badge bg-light text-dark">Sleeps 2</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-0 p-3">
+                            <button class="btn btn-outline-secondary w-100">Edit Details</button>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Room Card Example 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card room-card h-100">
+                        <img src='https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400&h=250&fit=crop' class="card-img-top" alt="Family Room">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Family Room</h5>
+                            <p class="card-text text-muted">Ultimate luxury with panoramic views, private balcony, jacuzzi, and personal butler service.</p>
+                             <p class="fw-bold fs-5 mb-2">₹15,999/night</p>
+                             <div>
+                                <span class="badge bg-light text-dark">3 Available</span>
+                                <span class="badge bg-light text-dark">Sleeps 4</span>
+                            </div>
+                        </div>
+                         <div class="card-footer bg-white border-0 p-3">
+                            <button class="btn btn-outline-secondary w-100">Edit Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <!-- Room Card Example 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card room-card h-100">
+                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=250&fit=crop" class="card-img-top" alt="Family Room">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Family Room</h5>
+                            <p class="card-text text-muted">Perfect for families with connecting rooms, child-friendly amenities, and extra space for comfort.</p>
+                             <p class="fw-bold fs-5 mb-2">₹6,999/night</p>
+                             <div>
+                                <span class="badge bg-light text-dark">3 Available</span>
+                                <span class="badge bg-light text-dark">Sleeps 4</span>
+                            </div>
+                        </div>
+                         <div class="card-footer bg-white border-0 p-3">
+                            <button class="btn btn-outline-secondary w-100">Edit Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Add Room Modal -->
+    <div class="modal fade" id="addRoomModal" tabindex="-1" aria-labelledby="addRoomModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addRoomModalLabel">Add New Room</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="roomName" class="form-label">Room Name / Type</label>
+                            <input type="text" class="form-control" id="roomName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="roomDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="roomDescription" rows="3"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="roomPrice" class="form-label">Price per Night ($)</label>
+                                <input type="number" class="form-control" id="roomPrice" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="roomQuantity" class="form-label">Total Quantity</label>
+                                <input type="number" class="form-control" id="roomQuantity" required>
+                            </div>
+                        </div>
+                         <div class="mb-3">
+                            <label for="roomImage" class="form-label">Room Image</label>
+                            <input class="form-control" type="file" id="roomImage">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Amenities</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="wifi" value="wifi">
+                                    <label class="form-check-label" for="wifi">Free Wi-Fi</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="ac" value="ac">
+                                    <label class="form-check-label" for="ac">Air Conditioning</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="balcony" value="balcony">
+                                    <label class="form-check-label" for="balcony">Balcony</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Room</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

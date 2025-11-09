@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout - StayIn Admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #F8B400;
+            --light-bg: #EAEFF2;
+            --dark-bg: #2C3E50;
+            --text-color: #34495E;
+        }
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .logout-card {
+            width: 100%;
+            max-width: 450px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background-color: #fff;
+            text-align: center;
+        }
+        .logout-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="card logout-card p-4 p-md-5">
+        <div class="card-body">
+            <i class="fas fa-check-circle logout-icon mb-3"></i>
+            <h1 class="h3 mb-3 fw-bold">You have been logged out</h1>
+            <p class="text-muted mb-4">Thank you for managing Hotel Stay In. You can log back in anytime.</p>
+            <a href="login.html" class="btn btn-primary btn-lg rounded-pill w-100">
+                <i class="fas fa-sign-in-alt me-2"></i>Log In Again
+            </a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
