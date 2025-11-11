@@ -165,5 +165,120 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Wait for the DOM to be fully loaded before running the script
+document.addEventListener("DOMContentLoaded", function() {
+
+    // Get the form and the password fields
+    const settingsForm = document.querySelector(".card-body form");
+    const newPassword = document.getElementById("newPassword");
+    const confirmPassword = document.getElementById("confirmPassword");
+    
+    // Get the email fields
+    const hotelEmail = document.getElementById("hotelEmail");
+    const adminEmail = document.getElementById("adminEmail");
+
+    // Function to show an error message
+    const showError = (input, message) => {
+        // Remove any existing error message
+        removeError(input);
+
+        // Create the error message element
+        const error = document.createElement('div');
+        error.className = 'text-danger small mt-1'; // Bootstrap classes for styling
+        error.textContent = message;
+
+        // Add 'is-invalid' class to the input
+        input.classList.add('is-invalid');
+
+        // Insert the error message after the input field
+        input.parentNode.appendChild(error);
+    };
+
+    // Function to remove an error message
+    const removeError = (input) => {
+        // Remove 'is-invalid' class
+        input.classList.remove('is-invalid');
+
+        // Find and remove the error message element
+        const error = input.parentNode.querySelector('.text-danger');
+        if (error) {
+            error.remove();
+        }
+    };
+    
+    // Function to validate an email address
+    const validateEmail = (input) => {
+        const email = input.value.trim();
+        // Simple regex for email validation
+        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (email === '') {
+            showError(input, 'Email address is required.');
+            return false;
+        } else if (!re.test(String(email).toLowerCase())) {
+            showError(input, 'Please enter a valid email address.');
+            return false;
+        } else {
+            removeError(input);
+            return true;
+        }
+    };
+
+    // Function to validate password match
+    const validatePasswordMatch = () => {
+        const newPassValue = newPassword.value;
+        const confirmPassValue = confirmPassword.value;
+
+        // Only validate if user has typed something in both fields
+        if (newPassValue === '' && confirmPassValue === '') {
+            removeError(confirmPassword); // Clear any old errors
+            return true; // Not changing password is valid
+        }
+
+        if (newPassValue !== confirmPassValue) {
+            showError(confirmPassword, 'Passwords do not match.');
+            return false;
+        } else {
+            removeError(confirmPassword);
+            return true;
+        }
+    };
+
+    // --- Event Listeners ---
+
+    // Listen for the form submission
+    settingsForm.addEventListener("submit", function(event) {
+        // Validate all fields
+        const isHotelEmailValid = validateEmail(hotelEmail);
+        const isAdminEmailValid = validateEmail(adminEmail);
+        const isPasswordMatchValid = validatePasswordMatch();
+
+        // If any validation fails, prevent the form from submitting
+        if (!isHotelEmailValid || !isAdminEmailValid || !isPasswordMatchValid) {
+            event.preventDefault(); // Stop the form submission
+            console.log("Form submission blocked due to validation errors.");
+        } else {
+            // Optional: You can add a success message or action here
+            console.log("Form validated successfully.");
+            // The form will submit as normal
+        }
+    });
+
+    // Add real-time validation as the user types
+    
+    // Check emails on 'blur' (when user clicks away)
+    hotelEmail.addEventListener('blur', () => validateEmail(hotelEmail));
+    adminEmail.addEventListener('blur', () => validateEmail(adminEmail));
+
+    // Check password match on 'keyup' (as user types in confirm box)
+    confirmPassword.addEventListener('keyup', validatePasswordMatch);
+    // Also check if user changes the 'new password' field after filling 'confirm'
+    newPassword.addEventListener('keyup', validatePasswordMatch);
+
+});
+</script>
+
 </body>
 </html>
