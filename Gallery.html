@@ -248,7 +248,69 @@
         </div>
     </main>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // gallery-validation.js
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const imageInput = document.getElementById("imageUpload");
+    const categorySelect = document.getElementById("imageCategory");
+
+    // Create red error message element for category
+    const categoryError = document.createElement("div");
+    categoryError.style.color = "red";
+    categoryError.style.fontSize = "0.9rem";
+    categoryError.style.marginTop = "5px";
+    categoryError.textContent = "⚠ Please select a category before uploading.";
+    categoryError.style.display = "none";
+    categorySelect.parentNode.appendChild(categoryError);
+
+    form.addEventListener("submit", function (e) {
+        let valid = true;
+        categoryError.style.display = "none";
+
+        const files = imageInput.files;
+
+        // Validate file selection
+        if (files.length === 0) {
+            alert("Please select at least one image to upload.");
+            valid = false;
+        }
+
+        // Validate image file types
+        for (let i = 0; i < files.length; i++) {
+            if (!files[i].type.startsWith("image/")) {
+                alert("Only image files are allowed (jpg, png, gif, etc.).");
+                valid = false;
+                break;
+            }
+        }
+
+        // Validate category selection
+        if (categorySelect.value.trim() === "" || categorySelect.value === "Select Category") {
+            categoryError.style.display = "block";
+            valid = false;
+        }
+
+        // Prevent form submission if invalid
+        if (!valid) {
+            e.preventDefault();
+        } else {
+            alert("✅ Images uploaded successfully!");
+        }
+    });
+
+    // Hide red error message when user selects a valid category
+    categorySelect.addEventListener("change", function () {
+        if (categorySelect.value.trim() !== "") {
+            categoryError.style.display = "none";
+        }
+    });
+});
+
+</script>
+
 </body>
 </html>
