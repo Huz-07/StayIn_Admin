@@ -59,6 +59,12 @@
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -96,7 +102,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="logout.html"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
             </li>
-        </ul>>
+        </ul>
     </div>
 
     <!-- Main Content -->
@@ -114,18 +120,21 @@
                             <h5 class="mb-0 fw-bold">Add New Service</h5>
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form id="serviceForm">
                                 <div class="mb-3">
                                     <label for="serviceName" class="form-label">Service Name</label>
                                     <input type="text" class="form-control" id="serviceName" placeholder="e.g., Rooftop Pool">
+                                    <div id="nameError" class="error-message">⚠ Please enter a service name.</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="serviceIcon" class="form-label"> Awesome Icon </label>
-                                    <input type="text" class="form-control" id="serviceIcon" placeholder="Add Icon">
+                                    <label for="serviceIcon" class="form-label">Awesome Icon</label>
+                                    <input type="text" class="form-control" id="serviceIcon" placeholder="Add icon name (e.g., fa-spa)">
+                                    <div id="iconError" class="error-message">⚠ Please enter an icon class name.</div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="serviceDescription" class="form-label">Description</label>
-                                    <textarea class="form-control" id="serviceDescription" rows="3"></textarea>
+                                    <textarea class="form-control" id="serviceDescription" rows="3" placeholder="Enter description..."></textarea>
+                                    <div id="descError" class="error-message">⚠ Please enter a description.</div>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100 rounded-pill">Add Service</button>
                             </form>
@@ -217,5 +226,52 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Validation JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("serviceForm");
+            const nameInput = document.getElementById("serviceName");
+            const iconInput = document.getElementById("serviceIcon");
+            const descInput = document.getElementById("serviceDescription");
+
+            const nameError = document.getElementById("nameError");
+            const iconError = document.getElementById("iconError");
+            const descError = document.getElementById("descError");
+
+            form.addEventListener("submit", function (e) {
+                let valid = true;
+
+                // Reset error messages
+                nameError.style.display = "none";
+                iconError.style.display = "none";
+                descError.style.display = "none";
+
+                // Validate Service Name
+                if (nameInput.value.trim() === "") {
+                    nameError.style.display = "block";
+                    valid = false;
+                }
+
+                // Validate Icon
+                if (iconInput.value.trim() === "") {
+                    iconError.style.display = "block";
+                    valid = false;
+                }
+
+                // Validate Description
+                if (descInput.value.trim() === "") {
+                    descError.style.display = "block";
+                    valid = false;
+                }
+
+                if (!valid) {
+                    e.preventDefault();
+                } else {
+                    alert("✅ Service added successfully!");
+                }
+            });
+        });
+    </script>
 </body>
 </html>
